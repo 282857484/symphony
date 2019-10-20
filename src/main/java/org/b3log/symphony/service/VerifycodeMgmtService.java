@@ -176,7 +176,8 @@ public class VerifycodeMgmtService {
                 switch (bizType) {
                     case Verifycode.BIZ_TYPE_C_REGISTER:
                         dataModel.put(Common.URL, Latkes.getServePath() + "/register?code=" + code);
-                        subject = langPropsService.get("registerEmailSubjectLabel", Latkes.getLocale());
+                        //subject = langPropsService.get("registerEmailSubjectLabel", Latkes.getLocale());
+                        subject = "注册邮箱验证-极趣口袋论坛";
 
                         break;
                     case Verifycode.BIZ_TYPE_C_RESET_PWD:
@@ -198,8 +199,9 @@ public class VerifycodeMgmtService {
                 verifycode.put(Verifycode.STATUS, Verifycode.STATUS_C_SENT);
                 verifycodeRepository.update(verifycode.optString(Keys.OBJECT_ID), verifycode);
 
-                final String fromName = langPropsService.get("symphonyEnLabel")
-                        + " " + langPropsService.get("verifycodeEmailFromNameLabel", Latkes.getLocale());
+                //final String fromName = langPropsService.get("symphonyEnLabel")
+                //        + " " + langPropsService.get("verifycodeEmailFromNameLabel", Latkes.getLocale());
+                String fromName = "注册邮箱验证-极趣口袋论坛";
                 Mails.sendHTML(fromName, subject, toMail, Mails.TEMPLATE_NAME_VERIFYCODE, dataModel);
             }
         } catch (final RepositoryException e) {
